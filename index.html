@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英语闪卡 | English Flashcards</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1 class="logo">📚 英语闪卡</h1>
+      <div class="stats-bar">
+        <span class="stat"><span class="stat-label">今日</span><span class="stat-value" id="todayCount">0</span></span>
+        <span class="stat"><span class="stat-label">已掌握</span><span class="stat-value" id="knownCount">0</span></span>
+        <span class="stat"><span class="stat-label">复习中</span><span class="stat-value" id="reviewCount">0</span></span>
+      </div>
+    </header>
+    <main class="main">
+      <div class="mode-selector">
+        <button class="mode-btn active" data-mode="all" onclick="setMode('all')">全部</button>
+        <button class="mode-btn" data-mode="new" onclick="setMode('new')">新词</button>
+        <button class="mode-btn" data-mode="review" onclick="setMode('review')">复习</button>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-text" id="progressText">0 / 0</span>
+      </div>
+      <div class="card-area" id="cardArea">
+        <div class="card-wrapper">
+          <div class="card" id="card" onclick="flipCard()">
+            <div class="card-inner" id="cardInner">
+              <div class="card-front">
+                <div class="card-category" id="cardCategory"></div>
+                <div class="card-word" id="cardWord">点击开始</div>
+                <div class="card-phonetic" id="cardPhonetic"></div>
+                <div class="card-hint">点击翻转</div>
+              </div>
+              <div class="card-back">
+                <div class="card-word-small" id="cardWordSmall"></div>
+                <div class="card-translation" id="cardTranslation"></div>
+                <div class="card-example" id="cardExample"></div>
+                <div class="card-example-zh" id="cardExampleZh"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="action-buttons" id="actionButtons" style="display:none;">
+          <button class="btn btn-again" onclick="rateCard('again')"><span class="btn-icon">❌</span><span class="btn-label">再来</span></button>
+          <button class="btn btn-hard" onclick="rateCard('hard')"><span class="btn-icon">😅</span><span class="btn-label">困难</span></button>
+          <button class="btn btn-good" onclick="rateCard('good')"><span class="btn-icon">✅</span><span class="btn-label">掌握</span></button>
+          <button class="btn btn-easy" onclick="rateCard('easy')"><span class="btn-icon">⭐</span><span class="btn-label">简单</span></button>
+        </div>
+      </div>
+      <div class="completion-screen" id="completionScreen" style="display:none;">
+        <div class="completion-emoji">🎉</div>
+        <h2 class="completion-title">太棒了！</h2>
+        <p class="completion-text">本轮学习完成！</p>
+        <div class="completion-stats">
+          <div class="completion-stat"><span class="completion-stat-value" id="finalKnown">0</span><span class="completion-stat-label">已掌握</span></div>
+          <div class="completion-stat"><span class="completion-stat-value" id="finalReview">0</span><span class="completion-stat-label">需复习</span></div>
+          <div class="completion-stat"><span class="completion-stat-value" id="finalTotal">0</span><span class="completion-stat-label">总计</span></div>
+        </div>
+        <button class="btn-restart" onclick="restartSession()">继续学习</button>
+      </div>
+      <div class="nav-buttons" id="navButtons">
+        <button class="nav-btn" id="prevBtn" onclick="prevCard()">← 上一个</button>
+        <span class="card-counter" id="cardCounter">1 / 1</span>
+        <button class="nav-btn" id="nextBtn" onclick="nextCard()">下一个 →</button>
+      </div>
+    </main>
+    <div class="search-bar">
+      <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜索单词..." oninput="handleSearch(this.value)">
+    </div>
+  </div>
+  <script src="cards.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
